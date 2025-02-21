@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: 50px;
+    }
+    
+    .choice{
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+       <button class="class" id="Rock">🤘</button>
+       <button class="class" id="Paper">✋</button>
+       <button class="class" id="Scissor">✌️</button>
+    </div>
+
+    <script>
+        const choice = document.querySelectorAll(".class")
+let userScore =0
+let userscorepara = 0
+let msg = 0
+
+choice.forEach ( (choice) => {
+
+    choice.addEventListener("click" , () =>{
+        let userchoice = choice.getAttribute("id")
+        // console.log("user click" , userchoice)
+        gencompChoice()
+        gameplay(userchoice)
+    }
+    )
+}
+)
+let gencompChoice = () =>{
+    let options = ["Rock" ,"Paper" , "Scissor"]
+    let comptChoice = Math.floor(Math.random()* 3)
+    // console.log("computer Choice =" , options [comptChoice])
+    return options[comptChoice]
+}
+const gameplay = (userChoice) => {
+    console.log("User Choice = ", userChoice)
+    
+    const compChoice =gencompChoice()
+    console.log("Computer Choice = ", compChoice)
+
+    if (userChoice === compChoice ) {
+        console.log("Game Draw")
+        msg.innerText = "Game Draw"
+    } else {
+        let userWin = true
+
+        if (userChoice === "rock") {
+            userWin = compChoice === "paper" ? false : true
+ 
+        } else if (userChoice === "paper") {
+            userWin = compChoice === "scissor" ? false : true
+        
+        } else {
+            userWin = compChoice === "rock" ? false : true
+        }
+         showWinner(userWin)
+     }
+}
+const showWinner = (userWin) => {
+if (userWin) {
+    userScore++
+    userscorepara.innerText = "User Won by" + userScore
+    console.log("User Winner")
+    msg.innertText = "You Won"
+}
+} 
+    </script>
+    
+</body>
+</html>
